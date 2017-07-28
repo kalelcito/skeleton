@@ -1,0 +1,14 @@
+services:
+#    core.example:
+#        class: CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+services:
+#    core.example:
+#        class: CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+     send_mail:
+         class: CoreBundle\Services\Mailer
+         arguments: ["@mailer","%dev_mail%"]
+     encrypt:
+         class: CoreBundle\Services\Encrypt
+         arguments: []

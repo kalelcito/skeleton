@@ -1,0 +1,59 @@
+{% block extends %}
+    {{ "{% extends '@Admin/base.html.twig' %}" }}
+{% endblock extends %}
+{{ "{% block navegacion %}" }}
+{{ "{{ include('@Admin/partials/navegacion.html.twig',{'menu':'Raloy Lubricantes','submenu':'"}}{{ entity }}{{ "'}) }}" }}
+{{ "{% endblock %}" }}
+
+{{ "{% block stylesheets %}" }}
+    {{ "{{ parent() }}" }}
+
+{{ "{% endblock %}" }}
+
+{{ "{% block javascripts %}" }}
+    {{ "{{ parent() }}" }}
+<script src="{{  "{{ asset('admin/js/jasny-bootstrap.js') }}" }}"></script>
+{{ "{% endblock %}" }}
+
+{% block body %}
+    {{ "{% block body %}" }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h3 class="box-title m-b-0">Ver Registro</h3>{#
+                    <p class="text-muted m-b-30 font-17"> </p>#}
+                <form class="form-horizontal" role="form">
+                    {%- for field, metadata in fields %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ field|capitalize }}</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">
+                                    {%- if metadata.type in ['datetime'] %}
+                                        {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}
+                                    {%- elseif metadata.type in ['date'] %}
+                                        {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d\') }}{% endif %}' }}
+                                    {%- elseif metadata.type in ['time'] %}
+                                        {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'H:i:s\') }}{% endif %}' }}
+                                    {%- elseif metadata.type in ['array'] %}
+                                        {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}
+                                    {%- elseif metadata.type in ['boolean'] %}
+                                        {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}Yes{% else %}No{% endif %}' }}
+                                    {%- else %}
+                                        {{ '{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}' }}
+                                    {%- endif %}
+                                </p>
+                            </div>
+                        </div>
+                    {%- endfor %}
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12">
+                            {% set hide_edit, hide_delete = false, true %}
+                            {{ include('crud/views/others/footerform_actions.html.twig.twig') -}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{ "{% endblock %}" }}
+{% endblock body %}

@@ -1,0 +1,21 @@
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
+core:
+    resource: "@CoreBundle/Controller/"
+    type:     annotation
+    prefix:   /core
+
+frontend:
+    resource: "@FrontendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+logoutadmin:
+    path: /admin/logout
+
+pageNotFound:
+    path: /{path}
+    defaults: {_controller: FrontendBundle:Default:error404}

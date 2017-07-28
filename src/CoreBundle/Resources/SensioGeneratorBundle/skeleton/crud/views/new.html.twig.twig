@@ -1,0 +1,46 @@
+{% block extends %}
+    {{ "{% extends '@Admin/base.html.twig' %}" }}
+{% endblock extends %}
+{{ "{% block navegacion %}" }}
+{{ "{{ include('@Admin/partials/navegacion.html.twig',{'menu':'Raloy Lubricantes','submenu':'"}}{{ entity }}{{ "'}) }}" }}
+{{ "{% endblock %}" }}
+
+{{ "{% block stylesheets %}" }}
+    {{ "{{ parent() }}" }}
+
+{{ "{% endblock %}" }}
+
+{{ "{% block javascripts %}" }}
+    {{ "{{ parent() }}" }}
+<script src="{{  "{{ asset('admin/js/jasny-bootstrap.js') }}" }}"></script>
+{{ "{% endblock %}" }}
+{% block body %}
+{{ "{% block body %}" }}
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Nuevo Registro</h3>{#
+                    <p class="text-muted m-b-30 font-17"> </p>#}
+                    {{ "{% form_theme form '@Admin/form/innology_bootstrap_3_horizontal_layout.html.twig' %}" }}
+                    {{ '{{ form_start(form) }}' }}
+                    {{ '{{ form_widget(form) }}' }}
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12">
+                            {% set hide_edit, hide_delete = true, true %}
+                            {{ include('crud/views/others/footerform_actions.html.twig.twig') -}}
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-t-10" style="float:left;  margin:5px;" >Guardar</button>
+                        </div>
+                    </div>
+                    {{ '{{ form_end(form) }}' }}
+                </div>
+        </div>
+    </div>
+
+{{ "{% endblock %}" }}
+{% endblock body %}

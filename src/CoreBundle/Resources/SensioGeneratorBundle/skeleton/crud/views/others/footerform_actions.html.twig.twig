@@ -1,0 +1,9 @@
+            <a class="btn btn-inverse waves-effect waves-light m-t-10" style="float:left; margin:5px;" href="{{ "{{ path('" ~ route_name_prefix ~ "_index') }}" }}">Regresar</a>
+        {%- if ('edit' in actions) and (not hide_edit) %}
+            <a class="btn btn-info waves-effect waves-light m-t-10" style="float:left;  margin:5px;"  href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">Editar</a>
+        {%- endif %}
+        {%- if ('delete' in actions) and (not hide_delete) %}
+            {{ '{{ form_start(delete_form) }}' }}
+            <button type="submit" class="btn btn-red waves-effect waves-light m-t-10" style="float:left;  margin:5px;">Borrar</button>
+            {{ '{{ form_end(delete_form) }}' }}
+        {%- endif %}
